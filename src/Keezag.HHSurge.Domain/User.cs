@@ -2,6 +2,7 @@
 using FluentValidation.Results;
 using Keezag.Common.DomainObjects;
 using System;
+using System.Collections.Generic;
 
 namespace Keezag.HHSurge.Domain
 {
@@ -11,15 +12,15 @@ namespace Keezag.HHSurge.Domain
 
         public string Email { get; private set; }
 
-        public Profile Profile { get; private set; }
-        
+        private readonly List<Profile> _profiles;
+        public IReadOnlyCollection<Profile> Profiles => _profiles;
+
         protected User() { }
 
-        public User(string name, string email, Profile profile)
+        public User(string name, string email)
         {
             Name = name;
             Email = email;
-            Profile = profile;
         }
 
         public override bool IsValid()
