@@ -15,9 +15,12 @@
     </PackageReference>
     <PackageReference Include="coverlet.collector" Version="1.0.1" />
     <PackageReference Include="Bogus" Version="28.0.3" />
+    <PackageReference Include="Moq" Version="4.14.4" />
+    <PackageReference Include="Moq.AutoMock" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Keezag.HHSurge.Application\Keezag.HHSurge.Application.csproj" />
     <ProjectReference Include="..\..\src\Keezag.HHSurge.Domain\Keezag.HHSurge.Domain.csproj" />
   </ItemGroup>
 

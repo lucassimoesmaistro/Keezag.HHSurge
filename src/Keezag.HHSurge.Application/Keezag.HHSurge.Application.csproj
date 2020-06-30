@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Keezag.HHSurge.Domain\Keezag.HHSurge.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

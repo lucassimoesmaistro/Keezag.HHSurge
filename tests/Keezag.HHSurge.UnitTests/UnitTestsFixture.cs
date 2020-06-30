@@ -8,11 +8,11 @@ using Xunit;
 
 namespace Keezag.HHSurge.UnitTests
 {
-    [CollectionDefinition(nameof(UnitTestsCollection))]
-    public class UnitTestsCollection : ICollectionFixture<UnitTestsFixture>
+    [CollectionDefinition(nameof(CrudTestsCollection))]
+    public class CrudTestsCollection : ICollectionFixture<CrudTestsFixture>
     { }
 
-    public class UnitTestsFixture : IDisposable
+    public class CrudTestsFixture : IDisposable
     {
         public User GenerateValidUser()
         {
