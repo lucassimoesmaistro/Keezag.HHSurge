@@ -17,3 +17,5 @@
 /tests/Keezag.HHSurge.IntegratedTests/obj
 /tests/Keezag.HHSurge.UnitTests/bin/Debug/netcoreapp3.1
 /tests/Keezag.HHSurge.UnitTests/obj
+/src/Keezag.HHSurge.Application/bin/Debug/netcoreapp3.1
+/src/Keezag.HHSurge.Application/obj

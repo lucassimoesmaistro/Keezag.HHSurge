@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Keezag.HHSurge.Domain
+namespace Keezag.HHSurge.Application
 {
     public class Class1
     {
