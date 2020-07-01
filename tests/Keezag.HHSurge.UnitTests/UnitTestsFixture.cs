@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
+using static Keezag.HHSurge.Domain.User;
 
 namespace Keezag.HHSurge.UnitTests
 {
@@ -16,21 +17,21 @@ namespace Keezag.HHSurge.UnitTests
     {
         public User GenerateValidUser()
         {
-            return GenerateUser(1, true).FirstOrDefault();
+            return GenerateUser(1).FirstOrDefault();
         }
 
-        public IEnumerable<User> GenerateUser(int quantidade, bool ativo)
+        public IEnumerable<User> GenerateUser(int count)
         {
             var genero = new Faker().PickRandom<Name.Gender>();
 
             var users = new Faker<User>("pt_BR")
-                .CustomInstantiator(u => new User(
+                .CustomInstantiator(u => UserFactory.NewUser(
                     u.Name.FullName(genero),
                     ""))
                 .RuleFor(c => c.Email, (f, c) =>
                       f.Internet.Email(f.Person.FirstName, f.Person.LastName));
 
-            return users.Generate(quantidade);
+            return users.Generate(count);
         }
 
         public void Dispose()

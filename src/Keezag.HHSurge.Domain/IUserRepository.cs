@@ -8,15 +8,15 @@ namespace Keezag.HHSurge.Domain
 {
     public interface IUserRepository : IRepository<User>
     {
-        Task Add(User request);
+        void Add(User user);
         Task<IEnumerable<User>> GetAll();
         Task<User> Get(User user);
-        Task AddProfile(User user);
-        Task UpdateProfile(User user);
-        Task DeleteProfile(Guid userId);
-        Task ChangeProfileType(User user);
-        Task Update(User user);
+        Task<User> GetById(Guid userId);
+        void Add(UserProfile profile);
+        void Update(UserProfile profile);
+        void Delete(UserProfile profile);
+        void Update(User user);
         Task<User> Get(User user, ProfileType type);
-        Task Delete(Guid userId);
+        void Delete(User user);
     }
 }

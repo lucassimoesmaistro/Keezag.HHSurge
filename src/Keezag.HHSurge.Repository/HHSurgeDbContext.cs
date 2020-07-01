@@ -13,7 +13,7 @@ namespace Keezag.HHSurge.Repository
         public HHSurgeDbContext(DbContextOptions<HHSurgeDbContext> options) : base(options) { }
 
         public DbSet<User> User { get; set; }
-        public DbSet<Profile> Profile { get; set; }
+        public DbSet<UserProfile> Profile { get; set; }
 
         public async Task<bool> Commit()
         {

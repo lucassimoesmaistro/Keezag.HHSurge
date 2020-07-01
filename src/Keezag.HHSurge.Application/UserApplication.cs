@@ -13,21 +13,21 @@ namespace Keezag.HHSurge.Application
         {
             _userRepository = userRepository;
         }
-
        
         public async Task<bool> Add(User user)
         {
             if (!user.IsValid())
                 return false;
 
-            await _userRepository.Add(user);
+            _userRepository.Add(user);
 
             return await _userRepository.UnitOfWork.Commit();
         }       
 
         public async Task<bool> Delete(Guid userId)
         {
-            await _userRepository.Delete(userId);
+            var user = await _userRepository.GetById(userId);
+            _userRepository.Delete(user);
             return await _userRepository.UnitOfWork.Commit();
         }
 
@@ -42,7 +42,6 @@ namespace Keezag.HHSurge.Application
             return await _userRepository.Get(user, type);
         }
 
-
         public async Task<IEnumerable<User>> GetAll()
         {
             return await _userRepository.GetAll();
@@ -53,48 +52,43 @@ namespace Keezag.HHSurge.Application
             if (!user.IsValid())
                 return false;
 
-            await _userRepository.Update(user);
+            _userRepository.Update(user);
 
             return await _userRepository.UnitOfWork.Commit();
         }
 
-        public async Task<bool> AddProfile(User user)
+        public async Task<bool> AddProfile(UserProfile profile)
         {
-            if (!user.IsValid())
-                return false;
-
-            await _userRepository.AddProfile(user);
+            _userRepository.Add(profile);
 
             return await _userRepository.UnitOfWork.Commit();
         }
 
-        public async Task<bool> UpdateProfile(User user)
+        public async Task<bool> UpdateProfile(UserProfile profile)
         {
-            if (!user.IsValid())
-                return false;
 
-            await _userRepository.UpdateProfile(user);
+            _userRepository.Update(profile);
 
             return await _userRepository.UnitOfWork.Commit();
         }
-
-        public async Task<bool> ChangeProfileType(User user, ProfileType newProfileType)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public async Task<bool> DeleteProfile(Guid profileId)
         {
-            await _userRepository.DeleteProfile(profileId);
-            return await _userRepository.UnitOfWork.Commit();
+            //await _userRepository.Delete(profileId);
+            //return await _userRepository.UnitOfWork.Commit();
+            throw new NotImplementedException();
         }
 
 
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _userRepository?.Dispose();
         }
 
+        public Task<bool> ChangeProfileType(UserProfile profile, ProfileType newProfileType)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

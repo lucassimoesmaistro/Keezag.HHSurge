@@ -3,7 +3,7 @@ using System;
 
 namespace Keezag.HHSurge.Domain
 {
-    public class Profile : Entity
+    public class UserProfile : Entity
     {
         public Guid? UserId { get; private set; }
         public string Document { get; private set; }
@@ -14,14 +14,19 @@ namespace Keezag.HHSurge.Domain
         public ProfileType Type { get; set; }
         public User User { get; set; }
 
-        protected Profile() { }
+        protected UserProfile() { }
 
-        public Profile(string document, string address, string avatar, ProfileType type)
+        public UserProfile(string document, string address, string avatar, ProfileType type)
         {
             Document = document;
             Address = address;
             Avatar = avatar;
             Type = type;
+        }
+
+        public void ConnectToUser(Guid id)
+        {
+            UserId = id;
         }
     }
 }

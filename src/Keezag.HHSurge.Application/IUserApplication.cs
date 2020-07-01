@@ -14,10 +14,10 @@ namespace Keezag.HHSurge.Application
         Task<bool> Add(User user);
         Task<bool> Update(User user);
         Task<bool> Delete(Guid userId);
-            
-        Task<bool> AddProfile(User user);
-        Task<bool> UpdateProfile(User user);
-        Task<bool> ChangeProfileType(User user, ProfileType newProfileType);
+
+        Task<bool> AddProfile(UserProfile profile);
+        Task<bool> UpdateProfile(UserProfile profile);
+        Task<bool> ChangeProfileType(UserProfile profile, ProfileType newProfileType);
         Task<bool> DeleteProfile(Guid profileId);
 
     }

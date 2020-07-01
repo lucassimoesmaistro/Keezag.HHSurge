@@ -11,22 +11,58 @@ namespace Keezag.HHSurge.Domain
         public string Name { get; private set; }
 
         public string Email { get; private set; }
+        public UserStatus UserStatus { get; private set; }
 
-        private readonly List<Profile> _profiles;
-        public IReadOnlyCollection<Profile> Profiles => _profiles;
+        private readonly List<UserProfile> _profiles;
+        public IReadOnlyCollection<UserProfile> Profiles => _profiles;
 
-        protected User() { }
+        protected User()
+        {
+            _profiles = new List<UserProfile>();
+        }
 
         public User(string name, string email)
         {
             Name = name;
             Email = email;
+            _profiles = new List<UserProfile>();
         }
 
         public override bool IsValid()
         {
             ValidationResult = new UserValidations().Validate(this);
             return ValidationResult.IsValid;
+        }
+                     
+        public void AddProfile(UserProfile profile)
+        {
+            profile.ConnectToUser(Id);
+
+            _profiles.Add(profile);
+        }
+        public static class UserFactory
+        {
+            public static User NewUser(string name, string email)
+            {
+                var user = new User
+                {
+                    Name = name,
+                    Email = email
+                };
+
+                user.SetAsInactive();
+                return user;
+            }
+        }
+
+        public void SetAsInactive()
+        {
+            UserStatus = UserStatus.Inactive;
+        }
+
+        public void SetAsActive()
+        {
+            UserStatus = UserStatus.Active;
         }
     }
     public class UserValidations : AbstractValidator<User>

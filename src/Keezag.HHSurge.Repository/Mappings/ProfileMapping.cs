@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Keezag.HHSurge.Repository.Mappings
 {
-    public class ProfileMapping : IEntityTypeConfiguration<Profile>
+    public class ProfileMapping : IEntityTypeConfiguration<UserProfile>
     {
-        public void Configure(EntityTypeBuilder<Profile> builder)
+        public void Configure(EntityTypeBuilder<UserProfile> builder)
         {
             builder.HasKey(c => c.Id);
 

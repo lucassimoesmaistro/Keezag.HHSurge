@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Keezag.Common.Log;
 
-namespace Keezag.Common
+namespace Keezag.HHSurge.Bootstrapper
 {
     public static class LogServiceInitializer
     {

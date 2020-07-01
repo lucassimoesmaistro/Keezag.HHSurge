@@ -52,7 +52,7 @@ namespace Keezag.HHSurge.UnitTests
             mocker.GetMock<IUserRepository>().Verify(r => r.Get(user), Times.Once);
             Assert.NotNull(result);
             Assert.Equal(user.Id.ToString(), result.Result.Id.ToString());
-        }
+        }        
     }
 
     

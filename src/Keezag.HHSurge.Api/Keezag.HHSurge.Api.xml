@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Keezag.HHSurge.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Keezag.HHSurge.Api.Controllers.CrudTestController.Post(System.String,Keezag.HHSurge.Application.Model.UserModel)">
+            <param name="profile">professional or personal</param> 
+        </member>
+        <member name="M:Keezag.HHSurge.Api.Controllers.CrudTestController.Post(System.Guid,System.String,Keezag.HHSurge.Application.Model.ProfileModel)">
+            <param name="profile">professional or personal</param> 
+        </member>
+        <member name="M:Keezag.HHSurge.Api.Controllers.CrudTestController.Delete(System.Int32,System.String,System.String)">
+            <param name="profile">professional or personal</param> 
+            <param name="newprofile">professional or personal</param> 
+        </member>
+    </members>
+</doc>
