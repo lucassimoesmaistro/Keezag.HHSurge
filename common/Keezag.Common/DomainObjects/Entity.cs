@@ -1,6 +1,7 @@
 ﻿using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Keezag.Common.DomainObjects
@@ -9,6 +10,7 @@ namespace Keezag.Common.DomainObjects
     {
         public Guid Id { get; set; }
 
+        [NotMapped]
         public ValidationResult ValidationResult { get; protected set; }
         protected Entity()
         {
