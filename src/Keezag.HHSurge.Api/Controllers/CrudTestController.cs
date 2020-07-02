@@ -5,6 +5,7 @@ using AutoMapper;
 using Keezag.HHSurge.Application;
 using Keezag.HHSurge.Application.Model;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Keezag.HHSurge.Api.Controllers
 {
@@ -24,15 +25,15 @@ namespace Keezag.HHSurge.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<List<UserModel>> Get()
-        {            
-            return _mapper.Map<List<UserModel>>(await  _userApplication.GetAll());
+        public async Task<IActionResult> Get()
+        {
+            return Ok(_mapper.Map<List<UserModel>>(await _userApplication.GetAll()));
         }
 
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(Guid id)
         {
-            return "value";
+            return Ok(_mapper.Map<UserModel>(await _userApplication.GetById(id)));
         }
 
         /// <param name="profile">professional or personal</param> 
@@ -43,38 +44,27 @@ namespace Keezag.HHSurge.Api.Controllers
             var newUser = await _userApplication.Add(user);
             return Ok(newUser);
         }
-
-        /// <param name="profile">professional or personal</param> 
-        [HttpPost("{id}/{profile}")]
-        public void Post(Guid id, string profile, [FromBody] ProfileModel value)
+        
+        [HttpPut("{userId}")]
+        public async Task<IActionResult> Put(Guid userId, UserModel user)
         {
-            var i = 1 + 2;
+            user.UserId = userId;
+            var newUser = await _userApplication.Update(user);
+            return Ok(newUser);
         }
 
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] UserModel user)
+        [HttpDelete("{userId}")]
+        public async Task<IActionResult> Delete(Guid userId)
         {
-            var i = 1 + 2;
-        }
-
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-            var i = 1 + 2;
-        }
-
-        [HttpDelete("{id}/{profile}")]
-        public void Delete(int id, string profile)
-        {
-            var i = 1 + 2;
+            return Ok(await _userApplication.Delete(userId));
         }
 
         /// <param name="profile">professional or personal</param> 
         /// <param name="newprofile">professional or personal</param> 
-        [HttpPatch("{id}/{profile}/{newprofile}")]
-        public void Delete(int id, string profile, string newprofile)
+        [HttpPatch("{userId}/{profile}/{newprofile}")]
+        public async Task<IActionResult> ChangeProfileType(Guid userId, string profile, string newprofile)
         {
-            var i = 1 + 2;
+            return Ok(await _userApplication.ChangeProfileType(userId, profile, newprofile));
         }
     }
 }

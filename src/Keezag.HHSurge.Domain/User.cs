@@ -1,8 +1,10 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
 using Keezag.Common.DomainObjects;
+using Keezag.Common.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Keezag.HHSurge.Domain
 {
@@ -63,6 +65,17 @@ namespace Keezag.HHSurge.Domain
         public void SetAsActive()
         {
             UserStatus = UserStatus.Active;
+        }
+
+        public void ChangeNameOrEmail(string name, string email)
+        {
+            Name = name;
+            Email = email;
+        }
+        public void ChangeProfileType(string profile, string newprofile)
+        {
+            ProfileType type = EnumExtension.Parse<ProfileType>(profile).Value;
+            _profiles.FirstOrDefault(f=>f.Type.Equals(type)).Type = EnumExtension.Parse<ProfileType>(newprofile).Value;
         }
     }
     public class UserValidations : AbstractValidator<User>

@@ -38,51 +38,36 @@ namespace Keezag.HHSurge.Application
         }
 
        
-        public async Task<User> Get(User user)
+        public async Task<User> GetById(Guid id)
         {
-            return await _userRepository.Get(user);
+            return await _userRepository.GetById(id);
         }
 
-        public async Task<User> GetUserAndProfileByType(User user, ProfileType type)
-        {
-            return await _userRepository.Get(user, type);
-        }
 
         public async Task<IEnumerable<User>> GetAll()
         {
             return await _userRepository.GetAll();
         }
 
-        public async Task<bool> Update(User user)
+        public async Task<User> Update(UserModel userModel)
         {
-            if (!user.IsValid())
-                return false;
+            User user = await _userRepository.GetById(userModel.UserId);
+
+            user.ChangeNameOrEmail(userModel.Name, userModel.Email);
 
             _userRepository.Update(user);
 
-            return await _userRepository.UnitOfWork.Commit();
-        }
-
-        public async Task<UserProfile> AddProfile(UserProfile profile)
-        {
-            _userRepository.Add(profile);
             await _userRepository.UnitOfWork.Commit();
-            return profile;
+            return user;
         }
 
-        public async Task<bool> UpdateProfile(UserProfile profile)
+        public async Task<User> ChangeProfileType(Guid userId, string profile, string newprofile)
         {
-
-            _userRepository.Update(profile);
-
-            return await _userRepository.UnitOfWork.Commit();
-        }
-        
-        public async Task<bool> DeleteProfile(Guid profileId)
-        {
-            //await _userRepository.Delete(profileId);
-            //return await _userRepository.UnitOfWork.Commit();
-            throw new NotImplementedException();
+            User user = await _userRepository.GetById(userId);
+            user.ChangeProfileType(profile, newprofile);
+            _userRepository.Update(user);
+            await _userRepository.UnitOfWork.Commit();
+            return user;
         }
 
 
@@ -90,11 +75,6 @@ namespace Keezag.HHSurge.Application
         public void Dispose()
         {
             _userRepository?.Dispose();
-        }
-
-        public Task<bool> ChangeProfileType(UserProfile profile, ProfileType newProfileType)
-        {
-            throw new NotImplementedException();
         }
     }
 }

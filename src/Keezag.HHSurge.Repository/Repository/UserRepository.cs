@@ -1,7 +1,9 @@
 ﻿using Keezag.Common.Data;
 using Keezag.HHSurge.Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -43,24 +45,15 @@ namespace Keezag.HHSurge.Repository.Repository
             _db?.Dispose();
         }
 
-        public Task<User> Get(User user)
+        public async Task<IEnumerable<User>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _db.User.Include(i => i.Profiles).AsNoTracking().ToListAsync();
         }
 
-        public Task<User> Get(User user, ProfileType type)
+        public async Task<User> GetById(Guid userId)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<User>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<User> GetById(Guid userId)
-        {
-            throw new NotImplementedException();
+            return _db.User.Where(w => w.Id.Equals(userId))
+                .Include(i => i.Profiles).AsNoTracking().ToListAsync().Result.FirstOrDefault();
         }
 
         public void Update(User user)

@@ -42,14 +42,14 @@ namespace Keezag.HHSurge.UnitTests
             var user = _crudTestsFixture.GenerateValidUser();
             var userApplication = mocker.CreateInstance<UserApplication>();
 
-            mocker.GetMock<IUserRepository>().Setup(c => c.Get(user))
+            mocker.GetMock<IUserRepository>().Setup(c => c.GetById(user.Id))
                 .Returns(Task.FromResult(user));
 
             // Act
-            var result = userApplication.Get(user);
+            var result = userApplication.GetById(user.Id);
 
             // Assert 
-            mocker.GetMock<IUserRepository>().Verify(r => r.Get(user), Times.Once);
+            mocker.GetMock<IUserRepository>().Verify(r => r.GetById(user.Id), Times.Once);
             Assert.NotNull(result);
             Assert.Equal(user.Id.ToString(), result.Result.Id.ToString());
         }        
