@@ -1,4 +1,5 @@
-﻿using Keezag.HHSurge.Domain;
+﻿using Keezag.HHSurge.Application.Model;
+using Keezag.HHSurge.Domain;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,11 +12,11 @@ namespace Keezag.HHSurge.Application
         Task<User> GetUserAndProfileByType(User user, ProfileType type);
         Task<IEnumerable<User>> GetAll();
 
-        Task<bool> Add(User user);
+        Task<User> Add(UserModel userModel);
         Task<bool> Update(User user);
         Task<bool> Delete(Guid userId);
 
-        Task<bool> AddProfile(UserProfile profile);
+        Task<UserProfile> AddProfile(UserProfile profile);
         Task<bool> UpdateProfile(UserProfile profile);
         Task<bool> ChangeProfileType(UserProfile profile, ProfileType newProfileType);
         Task<bool> DeleteProfile(Guid profileId);

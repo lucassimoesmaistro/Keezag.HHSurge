@@ -1,7 +1,10 @@
-﻿using Keezag.HHSurge.Domain;
+﻿using Keezag.Common.Extensions;
+using Keezag.HHSurge.Application.Model;
+using Keezag.HHSurge.Domain;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using static Keezag.HHSurge.Domain.User;
 
 namespace Keezag.HHSurge.Application
 {
@@ -14,14 +17,17 @@ namespace Keezag.HHSurge.Application
             _userRepository = userRepository;
         }
        
-        public async Task<bool> Add(User user)
+        public async Task<User> Add(UserModel userModel)
         {
-            if (!user.IsValid())
-                return false;
+            var user = UserFactory.NewUser(userModel.Name, userModel.Email);
+
+            user.AddProfile(new UserProfile(userModel.Document, userModel.Address, userModel.Avatar, EnumExtension.Parse<ProfileType>(userModel.Type).Value));
+
+            user.SetAsActive();
 
             _userRepository.Add(user);
-
-            return await _userRepository.UnitOfWork.Commit();
+            await _userRepository.UnitOfWork.Commit();
+            return user;
         }       
 
         public async Task<bool> Delete(Guid userId)
@@ -57,11 +63,11 @@ namespace Keezag.HHSurge.Application
             return await _userRepository.UnitOfWork.Commit();
         }
 
-        public async Task<bool> AddProfile(UserProfile profile)
+        public async Task<UserProfile> AddProfile(UserProfile profile)
         {
             _userRepository.Add(profile);
-
-            return await _userRepository.UnitOfWork.Commit();
+            await _userRepository.UnitOfWork.Commit();
+            return profile;
         }
 
         public async Task<bool> UpdateProfile(UserProfile profile)

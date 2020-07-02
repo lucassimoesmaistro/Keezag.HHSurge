@@ -37,9 +37,11 @@ namespace Keezag.HHSurge.Api.Controllers
 
         /// <param name="profile">professional or personal</param> 
         [HttpPost("{profile}")]
-        public void Post(string profile, UserModel user)
+        public async Task<IActionResult> Post(string profile, UserModel user)
         {
             user.Type = profile;
+            var newUser = await _userApplication.Add(user);
+            return Ok(newUser);
         }
 
         /// <param name="profile">professional or personal</param> 
