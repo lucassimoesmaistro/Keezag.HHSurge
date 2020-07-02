@@ -19,3 +19,11 @@
 /tests/Keezag.HHSurge.UnitTests/obj
 /src/Keezag.HHSurge.Application/bin/Debug/netcoreapp3.1
 /src/Keezag.HHSurge.Application/obj
+/src/Keezag.HHSurge.Api/.config
+/src/Keezag.HHSurge.Api/bin/Release/netcoreapp3.1
+/src/Keezag.HHSurge.Api/Properties/PublishProfiles
+/src/Keezag.HHSurge.Application/bin/Release/netcoreapp3.1
+/src/Keezag.HHSurge.Bootstrapper/bin/Release/netcoreapp3.1
+/src/Keezag.HHSurge.Domain/bin/Release/netcoreapp3.1
+/src/Keezag.HHSurge.Repository/bin/Release/netcoreapp3.1
+/common/Keezag.Common/bin/Release/netcoreapp3.1
