@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Keezag.Common
+namespace Keezag.HHSurge.Bootstrapper
 {
     public static class DomainInitializer
     {

@@ -11,6 +11,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\common\Keezag.Common\Keezag.Common.csproj" />
+    <ProjectReference Include="..\Keezag.HHSurge.Application\Keezag.HHSurge.Application.csproj" />
+    <ProjectReference Include="..\Keezag.HHSurge.Repository\Keezag.HHSurge.Repository.csproj" />
   </ItemGroup>
 
 </Project>

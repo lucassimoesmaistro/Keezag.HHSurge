@@ -1,7 +1,7 @@
 ﻿using Keezag.Common.Middlewares;
 using Microsoft.AspNetCore.Builder;
 
-namespace Keezag.Common
+namespace Keezag.HHSurge.Bootstrapper
 {
     public static class ExceptionHandlerInitializer
     {
